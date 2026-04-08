@@ -3,9 +3,9 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import dotenv from 'dotenv';
 
-dotenv.config();
+// Load .env only if it exists (not on Render)
+try { const dotenv = await import('dotenv'); dotenv.config(); } catch {}
 
 import {
   User, Course, Video, Note, Quiz, QuizResult, Payment, Enrollment
@@ -16,6 +16,8 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+console.log(`[startup] PORT=${PORT}, MONGODB_URI=${process.env.MONGODB_URI ? 'SET (' + process.env.MONGODB_URI.substring(0, 30) + '...)' : 'NOT SET'}`);
 
 // ─── Middleware ───────────────────────────────────────────────────────────────
 app.use(cors());
@@ -288,6 +290,7 @@ app.use((err: any, _req: any, res: any, _next: any) => {
 });
 
 // ─── Start Server ─────────────────────────────────────────────────────────────
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
+const HOST = '0.0.0.0';
+app.listen(Number(PORT), HOST, () => {
+  console.log(`🚀 Server running on ${HOST}:${PORT}`);
 });
