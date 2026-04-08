@@ -8,7 +8,7 @@ import { PaymentProvider } from './context/PaymentContext';
 import App from './App';
 import './index.css';
 
-const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID as string;
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || '366238340019-fj6m92e7sv4o3fk7uqjp0ojf0mbmd70m.apps.googleusercontent.com';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
