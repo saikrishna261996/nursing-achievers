@@ -275,7 +275,7 @@ app.get('/api/analytics', async (_req, res) => {
 // ═══════════════════════════════════════════════════════════════════════════════
 const distPath = path.join(__dirname, '..', 'dist');
 app.use(express.static(distPath));
-app.get('/{*splat}', (_req, res) => {
+app.get('*', (_req, res) => {
   const indexFile = path.join(distPath, 'index.html');
   res.sendFile(indexFile, (err) => {
     if (err) {
